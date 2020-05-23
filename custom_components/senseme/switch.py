@@ -9,7 +9,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
-    """Set up SenseME occupancy sensors."""
+    """Set up SenseME motion auto switches."""
     if hass.data.get(DOMAIN) is None:
         hass.data[DOMAIN] = {}
     if hass.data[DOMAIN].get("switch_devices") is None:
@@ -31,7 +31,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
                         light_switch = HASensemeLightMotionSwitch(device)
                         new_switches.append(light_switch)
                         _LOGGER.debug("Added new switch: %s", light_switch.name)
-        if len(new_sensors) > 0:
+        if len(new_switches) > 0:
             hass.add_job(async_add_entities, new_sensors)
 
     hass.data[DOMAIN]["discovery"].add_callback(async_discovered_devices)
