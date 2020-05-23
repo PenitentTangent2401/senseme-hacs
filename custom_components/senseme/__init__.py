@@ -7,6 +7,7 @@ from aiosenseme import __version__ as aiosenseme_version
 from homeassistant.components.binary_sensor import DOMAIN as BINARYSENSOR_DOMAIN
 from homeassistant.components.fan import DOMAIN as FAN_DOMAIN
 from homeassistant.components.light import DOMAIN as LIGHT_DOMAIN
+from homeassistant.components.switch import DOMAIN as SWITCH_DOMAIN
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.dispatcher import async_dispatcher_send
@@ -14,7 +15,7 @@ from homeassistant.helpers.dispatcher import async_dispatcher_send
 from .const import DISCOVERY_UPDATE_RATE, DOMAIN, EVENT_SENSEME_CONFIG_UPDATE
 from .version import __version__
 
-PLATFORMS = [FAN_DOMAIN, LIGHT_DOMAIN, BINARYSENSOR_DOMAIN]
+PLATFORMS = [FAN_DOMAIN, LIGHT_DOMAIN, BINARYSENSOR_DOMAIN, SWITCH_DOMAIN]
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -62,6 +63,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry):
         hass.data[DOMAIN]["fan_devices"] = []
         hass.data[DOMAIN]["light_devices"] = []
         hass.data[DOMAIN]["sensor_devices"] = []
+        hass.data[DOMAIN]["switch_devices"] = []
 
     return True
 
